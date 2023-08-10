@@ -8,7 +8,7 @@ function App() {
     <div className="App bg-zinc-950 text-white font-openSans min-h-screen box-border">
       <div
         id="overlay"
-        className="absolute top-0 left-0 h-screen w-screen bg-black/50 z-10 hidden"
+        className="absolute top-0 left-0 h-screen w-screen bg-black/60 z-10 hidden"
       ></div>
       <Homepage />
     </div>
