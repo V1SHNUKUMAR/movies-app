@@ -12,7 +12,9 @@ import "../swiperStyles.css";
 import logo from "../assets/logo.png";
 import LoadingComponent from "./LoadingComponent";
 
-const Homepage = () => {
+const Homepage = (props) => {
+  const { bearer_token } = props;
+
   const userImgUrl =
     "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80";
 
@@ -70,9 +72,9 @@ const Homepage = () => {
         </header>
 
         {/* image slider for movies */}
-        <ImageSlider />
+        <ImageSlider bearer_token={bearer_token} />
         {/* Movie grid */}
-        <MoviesGrid />
+        <MoviesGrid bearer_token={bearer_token} />
       </section>
     </div>
   );
@@ -140,7 +142,7 @@ const Sidebar = (props) => {
 
 // IMAGE SLIDER
 const ImageSlider = (props) => {
-  // const { sliderMovies, isLoading } = props;
+  const { bearer_token } = props;
   const [sliderMovies, setSliderMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -152,8 +154,7 @@ const ImageSlider = (props) => {
       url: "https://api.themoviedb.org/3/trending/all/day?page=1?language=en-IN",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNTFhZGQ2OGVjMjEyODFiYjNlZmZlZjNhMjExNjZlOCIsInN1YiI6IjY0ZDQ5MDAyZjE0ZGFkMDEwMDRhM2QyNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.diS7gLoTMQaOt6_XG5KyDFJ0sabUf5nLN-hAt7tZAr0",
+        Authorization: `Bearer ${bearer_token}`,
       },
     };
 
@@ -261,7 +262,9 @@ const SliderItem = (props) => {
   );
 };
 
-const MoviesGrid = () => {
+const MoviesGrid = (props) => {
+  const { bearer_token } = props;
+
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -272,8 +275,7 @@ const MoviesGrid = () => {
       url: "https://api.themoviedb.org/3/trending/all/day?page=2?language=en-IN",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNTFhZGQ2OGVjMjEyODFiYjNlZmZlZjNhMjExNjZlOCIsInN1YiI6IjY0ZDQ5MDAyZjE0ZGFkMDEwMDRhM2QyNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.diS7gLoTMQaOt6_XG5KyDFJ0sabUf5nLN-hAt7tZAr0",
+        Authorization: `Bearer ${bearer_token}`,
       },
     };
 
