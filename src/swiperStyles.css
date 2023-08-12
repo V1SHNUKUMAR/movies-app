@@ -26,4 +26,5 @@
    }
    .swiper-pagination-bullet-active{
     background-color: rgb(150, 130, 238);
+    border-left: 5px solid rgb(168, 130, 238);
    }
