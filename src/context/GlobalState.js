@@ -40,11 +40,13 @@ const GlobalState = (props) => {
     setIsLoadingForSlider(false);
   };
 
-  // --------------------------
+  // -------------------------- Movies for grid
   const [moviesForGrid, setMoviesForGrid] = useState([]);
   const [isLoadingForMoviesGrid, setIsLoadingForMoviesGrid] = useState(true);
+  const [page, setPage] = useState(2);
+  let totalMoviesForGrid;
 
-  const fetchMoviesForGrid = async (genre = "all") => {
+  const fetchMoviesForGrid = async (genre = "all", page = 2) => {
     let with_genres;
     if (genre === "all") {
       with_genres = "with_genres=";
@@ -53,7 +55,7 @@ const GlobalState = (props) => {
     }
     const options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en&page=2&primary_release_year=2023&sort_by=popularity.desc&${with_genres}`,
+      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en&page=${page}&primary_release_year=2023&sort_by=popularity.desc&${with_genres}`,
       headers: {
         accept: "application/json",
         Authorization: `Bearer ${bearer_token}`,
@@ -79,6 +81,45 @@ const GlobalState = (props) => {
     setIsLoadingForMoviesGrid(false);
   };
 
+  const fetchMoreMoviesForGrid = async (genre = "all") => {
+    let with_genres;
+    if (genre === "all") {
+      with_genres = "with_genres=";
+    } else {
+      with_genres = "with_genres=" + genre;
+    }
+    const options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en&page=${
+        page + 1
+      }&primary_release_year=2023&sort_by=popularity.desc&${with_genres}`,
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${bearer_token}`,
+      },
+    };
+
+    try {
+      setPage(page + 1);
+      setIsLoadingForMoviesGrid(true);
+      const response = await axios.request(options);
+      totalMoviesForGrid = response.data.total_results;
+      const filteredSliderMovies = response.data.results.filter(
+        (currMovie) =>
+          currMovie.backdrop_path &&
+          currMovie.poster_path &&
+          currMovie.title &&
+          currMovie.release_date &&
+          currMovie.vote_average
+      );
+      // console.log(response.data.results[3].title);
+      setMoviesForGrid(moviesForGrid.concat(filteredSliderMovies));
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoadingForMoviesGrid(false);
+  };
+
   return (
     <MyContext.Provider
       value={{
@@ -88,6 +129,8 @@ const GlobalState = (props) => {
         isLoadingForMoviesGrid,
         moviesForGrid,
         fetchMoviesForGrid,
+        fetchMoreMoviesForGrid,
+        totalMoviesForGrid,
       }}
     >
       {props.children}

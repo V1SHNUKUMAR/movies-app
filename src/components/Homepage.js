@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 
+// infinite scroll
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 // Import Swiper styles
@@ -15,8 +18,14 @@ import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import devPic from "../assets/devPic.jpg";
 
-const Homepage = (props) => {
-  const { bearer_token } = props;
+const Homepage = () => {
+  const myContext = useContext(MyContext);
+  const {
+    isLoadingForMoviesGrid,
+    moviesForGrid,
+    fetchMoreMoviesForGrid,
+    totalMoviesForGrid,
+  } = myContext;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -75,9 +84,17 @@ const Homepage = (props) => {
         </header>
 
         {/* image slider for movies */}
-        <ImageSlider bearer_token={bearer_token} />
+        <ImageSlider />
         {/* Movie grid */}
-        <MoviesGrid bearer_token={bearer_token} />
+        {isLoadingForMoviesGrid && <LoadingComponent />}
+        <InfiniteScroll
+          dataLength={moviesForGrid.length}
+          next={fetchMoreMoviesForGrid}
+          hasMore={moviesForGrid.length !== totalMoviesForGrid}
+          loader={<LoadingComponent />}
+        >
+          <MoviesGrid />
+        </InfiniteScroll>
       </section>
     </div>
   );
@@ -86,7 +103,7 @@ const Homepage = (props) => {
 export default Homepage;
 
 // IMAGE SLIDER
-const ImageSlider = (props) => {
+const ImageSlider = () => {
   const myContext = useContext(MyContext);
   const { isLoadingForSlider, sliderMovies, fetchSliderMovies } = myContext;
 

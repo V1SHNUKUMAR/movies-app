@@ -3,23 +3,20 @@ import LoadingComponent from "./LoadingComponent";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 
-const MoviesGrid = (props) => {
+const MoviesGrid = () => {
   const myContext = useContext(MyContext);
-  const { isLoadingForMoviesGrid, moviesForGrid, fetchMoviesForGrid } =
-    myContext;
+  const { moviesForGrid, fetchMoviesForGrid } = myContext;
 
   useEffect(() => {
     fetchMoviesForGrid("all");
   }, []);
 
-  return !isLoadingForMoviesGrid ? (
+  return (
     <div className="grid grid-cols-2 gap-3 sm::gap-4 sm:grid-cols-3 lg:grid-cols-4 md:pt-2 lg:place-items-center">
       {moviesForGrid.map((movie, index) => (
         <MovieGridItem key={index} movie={movie} />
       ))}
     </div>
-  ) : (
-    <LoadingComponent />
   );
 };
 

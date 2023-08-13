@@ -57,6 +57,7 @@ const Sidebar = (props) => {
       }
       i++;
     }
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
