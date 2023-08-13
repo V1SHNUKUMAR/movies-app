@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       openSans: ["Open Sans", "sans-serif"],
+      Gilroy: ["Roboto", "Arial", "Helvetica", "sans-serif"],
     },
     extend: {
       screens: {

@@ -13,12 +13,10 @@ import MoviesGrid from "./MoviesGrid";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
+import devPic from "../assets/devPic.jpg";
 
 const Homepage = (props) => {
   const { bearer_token } = props;
-
-  const userImgUrl =
-    "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -67,9 +65,12 @@ const Homepage = (props) => {
               <i className="fa-regular fa-bell"></i>
             </div>
 
-            <div className="cursor-pointer h-10 sm:h-9 aspect-square rounded-full overflow-hidden">
-              <img className="h-full" src={userImgUrl} alt="user" />
-            </div>
+            <Link to="/dev-info-page">
+              {" "}
+              <div className="cursor-pointer h-10 sm:h-9 aspect-square rounded-full overflow-hidden">
+                <img className="h-full" src={devPic} alt="user" />
+              </div>
+            </Link>
           </div>
         </header>
 
@@ -171,7 +172,7 @@ const SliderItem = (props) => {
               {movie.vote_average.toString().substring(0, 3)}
             </p>
           </div>
-          <button className="bg-violet-500 px-2 py-1 xs:px-6 xs:py-2 h-fit rounded-full text-[10px] xs:text-sm mb-0.5 hover:bg-violet-700 duration-300">
+          <button className="bg-violet-500/75 px-2 py-1 xs:px-6 xs:py-2 h-fit rounded-full text-[10px] xs:text-sm mb-0.5 hover:bg-violet-700 duration-300">
             Watch Now
           </button>
         </div>

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-
-import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
-const userImgUrl =
-  "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80";
+import logo from "../assets/logo.png";
+import devPic from "../assets/devPic.jpg";
 
 const MovieDetailsPage = () => {
   // const { movie } = props;
-  const [movie, setMovie] = useState({});
+  const movie = JSON.parse(localStorage.getItem("movie"));
 
   const countriesList = [
     "India",
@@ -24,12 +22,12 @@ const MovieDetailsPage = () => {
     "Denmark",
   ];
 
-  const fetchMovieFromLocalStorage = () => {
-    setMovie(JSON.parse(localStorage.getItem("movie")));
-  };
+  // const fetchMovieFromLocalStorage = () => {
+  //   setMovie(JSON.parse(localStorage.getItem("movie")));
+  // };
 
   useEffect(() => {
-    fetchMovieFromLocalStorage();
+    // fetchMovieFromLocalStorage();
     window.scrollTo(0, 0);
   }, []);
 
@@ -62,7 +60,7 @@ const MovieDetailsPage = () => {
       {/* Movie Details section */}
       <section
         id="movieDetails"
-        className="p-6 mx-auto max-w-[1200px] rounded-2xl flex justify-evenly gap-10 bg-zinc-950 relative -mt-48"
+        className="p-6 mx-auto max-w-[1200px] rounded-2xl flex justify-evenly gap-10 bg-zinc-950 relative -mt-40"
       >
         <div
           id="moviePic"
@@ -79,10 +77,12 @@ const MovieDetailsPage = () => {
             className="flex justify-between items-center gap-10"
           >
             <h1 className="text-2xl font-semibold">
-              Mission Impossible - Fallout{" "}
-              <span className="text-base text-white/60">(2018)</span>
+              {movie.title}{" "}
+              <span className="text-base text-white/60 font-normal">
+                ({movie.release_date.substring(0, 4) ?? ""})
+              </span>
             </h1>
-            <div id="Share" className="text-center text-3xl text-white/50">
+            <div id="Share" className="text-center text-2xl text-white/50">
               <i className="fa-solid fa-share-nodes block"></i>
               <p className="text-xs">Share</p>
             </div>
@@ -355,9 +355,12 @@ const TopHeader = () => {
           <i className="fa-regular fa-bell"></i>
         </div>
 
-        <div className="cursor-pointer h-10 sm:h-9 aspect-square rounded-full overflow-hidden">
-          <img className="h-full" src={userImgUrl} alt="user" />
-        </div>
+        <Link to="/dev-info-page">
+          {" "}
+          <div className="cursor-pointer h-10 sm:h-9 aspect-square rounded-full overflow-hidden">
+            <img className="h-full" src={devPic} alt="user" />
+          </div>
+        </Link>
       </div>
     </header>
   );
