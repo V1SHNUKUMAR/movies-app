@@ -45,12 +45,12 @@ const Homepage = () => {
       <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <section
         id="main-content"
-        className="w-screen max-w-6xl p-4 space-y-6 mx-auto md:flex-1 lg:w-4/5 md:px-5 md:space-y-4"
+        className="w-screen max-w-6xl px-4 py-2 space-y-6 mx-auto md:flex-1 lg:w-4/5 md:px-5 md:space-y-4"
       >
         {/* HEADER */}
-        <header className="md:sticky md:top-0 md:pt-2 md:z-50 bg-gradient-to-b flex justify-between items-center gap-4 md:gap-12">
+        <header className="sticky z-20 top-0 pt-1 md:pt-2 md:z-50 bg-gradient-to-b flex justify-between items-center gap-4 md:gap-12">
           {/* gradient layer */}
-          <div className="absolute hidden top-0 left-0 -z-10 h-[160%] bg-gradient-to-b from-zinc-950 via-zinc-950/70 to-transparent w-full md:block"></div>
+          <div className="absolute top-0 left-0 -z-10 h-[160%] bg-gradient-to-b from-zinc-950 via-zinc-950/70 to-transparent w-full "></div>
           {/* content */}
           <div className="flex items-center gap-3">
             <div

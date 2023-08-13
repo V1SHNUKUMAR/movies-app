@@ -106,7 +106,7 @@ const Sidebar = (props) => {
         id="close-menu-button"
         className={
           isMenuOpen
-            ? "text-xl opacity-100  backdrop-blur-sm bg-white/25 scale-100 delay-300 duration-300 h-12 w-12 rounded-full fixed top-7 z-20 left-[80%] xs:left-[70%] sm:left-[40%] "
+            ? "text-xl opacity-100 backdrop-blur-sm bg-white/25 scale-100 delay-300 duration-300 h-12 w-12 rounded-full fixed top-7 z-30 left-[80%] xs:left-[70%] sm:left-[40%] "
             : "opacity-0 h-12 w-12 scale-0 duration-300 rounded-full fixed top-7 z-20 left-[80%] xs:left-[70%] sm:left-[40%]"
         }
         onClick={() => setIsMenuOpen(false)}

@@ -15,7 +15,7 @@ function App() {
         <div className="App bg-zinc-950 text-white font-Gilroy min-h-screen box-border">
           <div
             id="overlay"
-            className="fixed top-0 left-0 h-screen w-screen bg-zinc-950/25 z-20 hidden"
+            className="fixed top-0 left-0 h-screen w-screen bg-zinc-950/25 z-30 hidden"
           ></div>
           <Routes>
             <Route
