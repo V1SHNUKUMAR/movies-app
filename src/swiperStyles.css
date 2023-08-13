@@ -26,8 +26,7 @@
    }
    .swiper-pagination-bullet-active{
     background-color: rgb(150, 130, 238);
-    /*  */
-    box-shadow: inset 0 0 3px 3px violet;
+    
 
 
    }
