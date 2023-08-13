@@ -75,10 +75,10 @@ const GlobalState = (props) => {
       );
       // console.log(response.data.results[3].title);
       setMoviesForGrid(filteredSliderMovies);
+      setIsLoadingForMoviesGrid(false);
     } catch (error) {
       console.log(error);
     }
-    setIsLoadingForMoviesGrid(false);
   };
 
   const fetchMoreMoviesForGrid = async (genre = "all") => {
@@ -114,10 +114,10 @@ const GlobalState = (props) => {
       );
       // console.log(response.data.results[3].title);
       setMoviesForGrid(moviesForGrid.concat(filteredSliderMovies));
+      setIsLoadingForMoviesGrid(false);
     } catch (error) {
       console.log(error);
     }
-    setIsLoadingForMoviesGrid(false);
   };
 
   return (

@@ -86,18 +86,16 @@ const Homepage = () => {
         {/* image slider for movies */}
         <ImageSlider />
         {/* Movie grid */}
-        {isLoadingForMoviesGrid ? (
-          <LoadingComponent />
-        ) : (
-          <InfiniteScroll
-            dataLength={moviesForGrid.length}
-            next={fetchMoreMoviesForGrid}
-            hasMore={moviesForGrid.length !== totalMoviesForGrid}
-            loader={<LoadingComponent />}
-          >
-            <MoviesGrid />
-          </InfiniteScroll>
-        )}
+        {isLoadingForMoviesGrid && <LoadingComponent />}
+
+        <InfiniteScroll
+          dataLength={moviesForGrid.length}
+          next={fetchMoreMoviesForGrid}
+          hasMore={moviesForGrid.length !== totalMoviesForGrid}
+          loader={<LoadingComponent />}
+        >
+          <MoviesGrid />
+        </InfiniteScroll>
       </section>
     </div>
   );
