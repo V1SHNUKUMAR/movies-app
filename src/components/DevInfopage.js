@@ -51,18 +51,19 @@ const DevInfopage = () => {
           <a href={portfolioLink} rel="noreferrer" target="_blank">
             {" "}
             <div className="border-dashed min-w-[90px] px-3 py-1.5 border rounded-full  hover:border-violet-300 hover:text-violet-300 duration-200">
-              Portfolio <i class="fa-solid fa-up-right-from-square text-xs"></i>
+              Portfolio{" "}
+              <i className="fa-solid fa-up-right-from-square text-xs"></i>
             </div>
           </a>
           <a href={linkedinLink} rel="noreferrer" target="_blank">
             {" "}
             <div className="border-dashed min-w-[90px] px-3 py-1.5 border rounded-full hover:border-violet-300 hover:text-violet-300 duration-200">
-              <i class="fa-brands fa-linkedin"></i> LinkedIn
+              <i className="fa-brands fa-linkedin"></i> LinkedIn
             </div>
           </a>
           <a href={githubLink} rel="noreferrer" target="_blank">
             <div className="border-dashed min-w-[90px] px-3 py-1.5 border rounded-full hover:border-violet-300 hover:text-violet-300 duration-200">
-              <i class="fa-brands fa-github"></i> Github
+              <i className="fa-brands fa-github"></i> Github
             </div>
           </a>
         </div>
