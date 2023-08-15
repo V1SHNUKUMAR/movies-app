@@ -48,6 +48,7 @@ const Sidebar = (props) => {
   const highlightTab = (tabId = "tab0") => {
     document.getElementById(tabId).style =
       "border-left: 5px solid rgb(168, 130, 238); color:rgb(168, 130, 238);font-weight:600;";
+    console.log(document.getElementById(tabId).style);
     let tabs = document.getElementsByClassName("tab");
     let i = 0;
     while (i < tabs.length) {

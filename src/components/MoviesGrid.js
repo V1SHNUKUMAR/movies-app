@@ -1,22 +1,44 @@
 import React, { useEffect, useContext } from "react";
-import LoadingComponent from "./LoadingComponent";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
+// infinite scroll
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import LoadingComponent from "./LoadingComponent";
 
 const MoviesGrid = () => {
   const myContext = useContext(MyContext);
-  const { moviesForGrid, fetchMoviesForGrid } = myContext;
+  const {
+    isLoadingForMoviesGrid,
+    moviesForGrid,
+    fetchMoreMoviesForGrid,
+    totalMoviesForGrid,
+    fetchMoviesForGrid,
+  } = myContext;
 
   useEffect(() => {
     fetchMoviesForGrid("all");
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm::gap-4 sm:grid-cols-3 lg:grid-cols-4 md:pt-2 lg:place-items-center">
-      {moviesForGrid.map((movie, index) => (
-        <MovieGridItem key={index} movie={movie} />
-      ))}
-    </div>
+    <>
+      {isLoadingForMoviesGrid ? (
+        <LoadingComponent />
+      ) : (
+        <InfiniteScroll
+          dataLength={moviesForGrid.length}
+          next={fetchMoreMoviesForGrid}
+          hasMore={moviesForGrid.length !== totalMoviesForGrid}
+          loader={<LoadingComponent />}
+        >
+          <div className="grid grid-cols-2 gap-3 sm::gap-4 sm:grid-cols-3 lg:grid-cols-4 md:pt-2 lg:place-items-center">
+            {moviesForGrid.map((movie, index) => (
+              <MovieGridItem key={index} movie={movie} />
+            ))}
+          </div>
+        </InfiniteScroll>
+      )}
+    </>
   );
 };
 
@@ -36,7 +58,7 @@ const MovieGridItem = (props) => {
         style={{
           background: `url(https://image.tmdb.org/t/p/w500${movie.poster_path}) no-repeat center center/cover`,
         }}
-        className="lg:w-[195px] xl:w-[230px] min-h-[180px] xs:min-h-[280px] h-full sm:h-80 rounded-2xl relative p-2 md:p-3 flex justify-between flex-col gap-10 xs:gap-20 md:gap-32"
+        className=" min-h-[180px] xs:min-h-[280px] h-full sm:h-80 rounded-2xl relative p-2 md:p-3 flex justify-between flex-col gap-10 xs:gap-20 md:gap-32 lg:w-[200px] xl:w-[260px]"
       >
         {/* Linear black gradient from bottom to top */}
         <div

@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 
-// infinite scroll
-import InfiniteScroll from "react-infinite-scroll-component";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 // Import Swiper styles
@@ -19,14 +16,6 @@ import MyContext from "../context/MyContext";
 import devPic from "../assets/devPic.jpg";
 
 const Homepage = () => {
-  const myContext = useContext(MyContext);
-  const {
-    isLoadingForMoviesGrid,
-    moviesForGrid,
-    fetchMoreMoviesForGrid,
-    totalMoviesForGrid,
-  } = myContext;
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -45,7 +34,7 @@ const Homepage = () => {
       <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <section
         id="main-content"
-        className="w-screen max-w-6xl px-4 py-2 space-y-6 mx-auto md:flex-1 lg:w-4/5 md:px-5 md:space-y-4"
+        className="w-screen max-w-[1600px] p-2 space-y-6 mx-auto md:flex-1 lg:w-4/5 md:px-5 md:space-y-4"
       >
         {/* HEADER */}
         <header className="sticky z-20 top-0 pt-1 md:pt-2 md:z-50 bg-gradient-to-b flex justify-between items-center gap-4 md:gap-12">
@@ -86,16 +75,8 @@ const Homepage = () => {
         {/* image slider for movies */}
         <ImageSlider />
         {/* Movie grid */}
-        {isLoadingForMoviesGrid && <LoadingComponent />}
 
-        <InfiniteScroll
-          dataLength={moviesForGrid.length}
-          next={fetchMoreMoviesForGrid}
-          hasMore={moviesForGrid.length !== totalMoviesForGrid}
-          loader={<LoadingComponent />}
-        >
-          <MoviesGrid />
-        </InfiniteScroll>
+        <MoviesGrid />
       </section>
     </div>
   );
@@ -115,7 +96,11 @@ const ImageSlider = () => {
   return (
     // <div className="w-[85vw] sm:w-[90vw] lg:max-w-3xl xl:max-w-5xl mx-auto">
     <div className="w-auto md:w-[68vw] lg:w-auto mx-auto">
-      {!isLoadingForSlider ? (
+      {isLoadingForSlider ? (
+        <div className="border border-zinc-700 rounded-3xl">
+          <LoadingComponent />
+        </div>
+      ) : (
         <Swiper
           spaceBetween={30}
           pagination={{ clickable: true }}
@@ -139,8 +124,6 @@ const ImageSlider = () => {
               ))
             : null}
         </Swiper>
-      ) : (
-        <LoadingComponent />
       )}
     </div>
   );

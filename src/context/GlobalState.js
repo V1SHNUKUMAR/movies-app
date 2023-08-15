@@ -42,7 +42,7 @@ const GlobalState = (props) => {
 
   // -------------------------- Movies for grid
   const [moviesForGrid, setMoviesForGrid] = useState([]);
-  const [isLoadingForMoviesGrid, setIsLoadingForMoviesGrid] = useState(true);
+  const [isLoadingForMoviesGrid, setIsLoadingForMoviesGrid] = useState(false);
   const [page, setPage] = useState(2);
   let totalMoviesForGrid;
 
@@ -101,7 +101,7 @@ const GlobalState = (props) => {
 
     try {
       setPage(page + 1);
-      setIsLoadingForMoviesGrid(true);
+      // setIsLoadingForMoviesGrid(true);
       const response = await axios.request(options);
       totalMoviesForGrid = response.data.total_results;
       const filteredSliderMovies = response.data.results.filter(
@@ -114,7 +114,7 @@ const GlobalState = (props) => {
       );
       // console.log(response.data.results[3].title);
       setMoviesForGrid(moviesForGrid.concat(filteredSliderMovies));
-      setIsLoadingForMoviesGrid(false);
+      // setIsLoadingForMoviesGrid(false);
     } catch (error) {
       console.log(error);
     }
